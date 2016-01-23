@@ -48,7 +48,7 @@ class BookDetailsViewController: UIViewController {
         let yPosition = detailsView.frame.origin.y - 300
         
         let height = detailsView.frame.size.height
-        let width = UIScreen.mainScreen().bounds.width
+        //let width = UIScreen.mainScreen().bounds.width
         
         UIView.animateWithDuration(1.0, animations: {
             

@@ -68,6 +68,7 @@
                                             <outlet property="bookPriceLabel" destination="Uro-mn-1nb" id="1FP-XN-P5w"/>
                                             <outlet property="bookTitleLabel" destination="p9b-tR-5en" id="mqV-ff-cDm"/>
                                             <outlet property="courseLabel" destination="ri2-Pg-HBT" id="Mcl-tJ-u8Y"/>
+                                            <outlet property="ratingStarsView" destination="ep0-1q-Hb2" id="PIQ-pX-ncw"/>
                                             <segue destination="rld-Ac-Wfs" kind="push" id="AEB-3y-3A6"/>
                                         </connections>
                                     </collectionViewCell>
@@ -85,6 +86,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="collectionView" destination="EOn-e4-Rk8" id="y41-v8-nB5"/>
+                        <outlet property="searchBar" destination="Z9z-Ug-5Ri" id="gUn-IV-w4X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -100,12 +102,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="i5t-A6-gmx">
-                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" id="AIc-Kf-mgP">
-                                <rect key="frame" x="0.0" y="317" width="375" height="302"/>
+                                <rect key="frame" x="0.0" y="603" width="375" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A8c-1R-OG1">

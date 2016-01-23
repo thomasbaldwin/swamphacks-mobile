@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     let books = [
         Book(
@@ -20,15 +20,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     ]
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var booksForSale: [Book] = []
+    var filteredData: [Book]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        searchBar.delegate = self
+        
         collectionView.backgroundColor = UIColor.whiteColor()
     
     }
@@ -58,6 +64,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         backgroundView.backgroundColor = UIColor.grayColor()
         
         cell.selectedBackgroundView = backgroundView
+        cell.ratingStarsView.backgroundColor = .None
         
         let singleBook = books[indexPath.row]
         
@@ -76,6 +83,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+//        let searchString = searchBar.text
+//        
+//        filteredData = searchText.isEmpty ? books : books.filter({(dataString: String) -> Bool in
+//            return dataString.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+//        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

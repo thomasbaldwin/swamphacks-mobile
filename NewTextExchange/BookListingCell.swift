@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class BookListingCell: UICollectionViewCell {
     
@@ -15,6 +16,7 @@ class BookListingCell: UICollectionViewCell {
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var bookPriceLabel: UILabel!
     @IBOutlet weak var courseLabel: UILabel!
+    @IBOutlet weak var ratingStarsView: CosmosView!
     
     
 }
