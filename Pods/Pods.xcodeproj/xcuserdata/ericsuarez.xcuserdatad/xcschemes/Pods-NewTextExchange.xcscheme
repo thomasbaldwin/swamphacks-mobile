@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1CEE309961D1175D3272CAF5'
+               BlueprintIdentifier = 'EC4C36F0D5899214328EB478'
                BlueprintName = 'Pods-NewTextExchange'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_NewTextExchange.framework'>

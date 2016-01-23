@@ -5,8 +5,8 @@ use_frameworks!
 
 target 'NewTextExchange' do
 
-pod 'AFNetworking',
-# pod 'Alamofire', '~> 3.0'
+pod 'AFNetworking'
+pod 'Cosmos', '~> 1.1'
 
 end
 

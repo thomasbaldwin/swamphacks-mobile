@@ -38,14 +38,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Dispose of any resources that can be recreated.
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        let totalwidth = collectionView.bounds.size.width;
-//        let numberOfCellsPerRow = 2
-//        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
-//        
-//        return CGSizeMake(dimensions, 315)
-//        
-//    }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let totalwidth = collectionView.bounds.size.width;
+        let numberOfCellsPerRow = 2
+        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
+        
+        return CGSizeMake(dimensions, 325)
+        
+    }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -53,6 +53,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BookCell", forIndexPath: indexPath) as! BookListingCell
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.grayColor()
+        
+        cell.selectedBackgroundView = backgroundView
         
         let singleBook = books[indexPath.row]
         
@@ -64,9 +69,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell.bookPriceLabel.text = formattedPrice! as String
         cell.courseLabel.text = singleBook.course! as String
         cell.bookImageView.setImageWithURL(singleBook.coverImage!)
+        cell.bookTitleLabel.sizeToFit()
 
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPathForCell(cell)
+        let singleBook = books[indexPath!.row]
+        
+        let bookDetailsViewController = segue.destinationViewController as! BookDetailsViewController
+        bookDetailsViewController.singleBook = singleBook
+        
+    }
+    
 
 }
 
