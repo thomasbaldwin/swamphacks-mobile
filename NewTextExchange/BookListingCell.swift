@@ -1,5 +1,5 @@
 //
-//  BookListingCellCollectionViewCell.swift
+//  BookListingCell.swift
 //  NewTextExchange
 //
 //  Created by Eric Suarez on 1/23/16.
@@ -9,5 +9,12 @@
 import UIKit
 
 class BookListingCell: UICollectionViewCell {
+    
+    
+    @IBOutlet weak var bookImageView: UIImageView!
+    @IBOutlet weak var bookTitleLabel: UILabel!
+    @IBOutlet weak var bookPriceLabel: UILabel!
+    @IBOutlet weak var courseLabel: UILabel!
+    
     
 }

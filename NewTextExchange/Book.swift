@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class Book: NSObject {
+    
+    var title: String?
+    var course: String?
+    var price: Int?
+    var coverImage: NSURL?
+    
+    init(title: String?, course: String?, price: Int?, coverImage: NSURL?) {
+        self.title = title
+        self.course = course
+        self.price = price
+        self.coverImage = coverImage
+    }
+    
+}
