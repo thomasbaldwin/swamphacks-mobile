@@ -71,6 +71,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         ratingStarsView.settings.fillMode = .Half
         
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
+        phoneImageButton.addTarget(self, action: "presentPhoneOptions", forControlEvents: UIControlEvents.TouchUpInside)
         
         messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
         //payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
@@ -230,8 +231,32 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         
     }
     
+    func presentPhoneOptions() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let callAction = UIAlertAction(title: "Call", style: .Default, handler: {(ACTION) in
+            self.callPhoneNumber()
+        })
+        
+        let sendMessageAction = UIAlertAction(title: "Send Text Message", style: .Default, handler: {(ACTION) in
+            self.sendMessage()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        alertController.addAction(callAction)
+        alertController.addAction(sendMessageAction)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func callPhoneNumber() {
-        if let phoneCallURL:NSURL = NSURL(string:"telprompt://5614003685") {
+        guard let creatorPhone = book?.creator?.phone else {
+            return
+        }
+        
+        if let phoneCallURL:NSURL = NSURL(string:"telprompt://\(creatorPhone)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
@@ -240,11 +265,15 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
     }
     
     func sendMessage() {
-        let messageVC = MFMessageComposeViewController()
-        messageVC.body = "Message String"
-        messageVC.recipients = ["5614003685"] // Optionally add some tel numbers
-        messageVC.messageComposeDelegate = self
+        guard let creatorPhone = book?.creator?.phone,
+            let firstName = book?.creator?.firstName else {
+                return
+        }
         
+        let messageVC = MFMessageComposeViewController()
+        messageVC.body = "Hey \(firstName)! I saw your textbook posted on OGBooks, I'm interested in purchasing it."
+        messageVC.recipients = [creatorPhone] // Optionally add some tel numbers
+        messageVC.messageComposeDelegate = self
         presentViewController(messageVC, animated: true, completion: nil)
     }
     
