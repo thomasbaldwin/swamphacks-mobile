@@ -9,8 +9,9 @@
 import UIKit
 import AFNetworking
 
+let reuseIdentifier = "Cell"
+
 class BooksViewController: UIViewController {
-    
     var filteredBooks = [Book]()
     let books = [
         Book(
@@ -20,8 +21,10 @@ class BooksViewController: UIViewController {
     
     ]
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet var searchField: UITextField!
+    var collectionView: UICollectionView!
+    let collectionViewInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 4)
+
+    @IBOutlet weak var searchField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +32,35 @@ class BooksViewController: UIViewController {
     }
     
     func setupViews() {
+        view.backgroundColor = .whiteColor()
+        
+        searchField.delegate = self
+        searchField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        searchField.frame.size.width = view.frame.width
+        searchField.frame.size.height = 26
+        searchField.clearButtonMode = .Always
+        navigationController?.navigationItem.titleView = searchField
         navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
         
         searchField.delegate = self
         searchField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView!.delegate = self
+        collectionView!.dataSource = self
+        collectionView!.setCollectionViewLayout(layout, animated: false)
+        collectionView!.registerClass(BookListingCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = .whiteColor()
+
+        view.addSubview(collectionView)
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+        collectionView.autoPinEdgesToSuperviewEdgesWithInsets(collectionViewInsets)
     }
     
     func filterBooks() {
@@ -66,11 +90,11 @@ class BooksViewController: UIViewController {
 
 extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let totalwidth = collectionView.bounds.size.width;
-        let numberOfCellsPerRow = 2
-        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
-        
-        return CGSizeMake(dimensions, 325)
+
+        let screenSize = UIScreen.mainScreen().bounds
+        let columnsPerPage: CGFloat = 2
+        let itemHeight: CGFloat = 375
+        return CGSize(width: (screenSize.width - 2 * (collectionViewInsets.left + collectionViewInsets.right)) / columnsPerPage, height: itemHeight)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -78,8 +102,8 @@ extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BookCell", forIndexPath: indexPath) as! BookListingCell
         
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BookListingCell
         let book = searchField.text!.isEmpty ? books[indexPath.row] : filteredBooks[indexPath.row]
         cell.book = book
         
@@ -88,7 +112,8 @@ extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
+        let bookDetailsViewController = storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
+        navigationController?.pushViewController(bookDetailsViewController!, animated: true)
     }
 }
 

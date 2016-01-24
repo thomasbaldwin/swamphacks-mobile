@@ -10,11 +10,12 @@ import UIKit
 import Cosmos
 
 class BookListingCell: UICollectionViewCell {
-    @IBOutlet weak var bookImageView: UIImageView!
-    @IBOutlet weak var bookTitleLabel: UILabel!
-    @IBOutlet weak var bookPriceLabel: UILabel!
-    @IBOutlet weak var courseLabel: UILabel!
-    //@IBOutlet weak var ratingStarsView: CosmosView!
+    var didSetupConstraints = false
+    
+    var bookImageView = UIImageView.newAutoLayoutView()
+    var bookTitleLabel = UILabel.newAutoLayoutView()
+    var bookPriceLabel = UILabel.newAutoLayoutView()
+    var bookCourseLabel = UILabel.newAutoLayoutView()
     
     var book: Book? {
         didSet {
@@ -36,7 +37,12 @@ class BookListingCell: UICollectionViewCell {
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.grayColor()
         selectedBackgroundView = backgroundView
-        //ratingStarsView.backgroundColor = .None
+        
+        contentView.addSubview(bookImageView)
+        contentView.addSubview(bookTitleLabel)
+        contentView.addSubview(bookPriceLabel)
+        contentView.addSubview(bookCourseLabel)
+        updateConstraints()
     }
     
     func updateUI() {
@@ -50,7 +56,7 @@ class BookListingCell: UICollectionViewCell {
         }
         
         if let bookCourse = book.course as String! {
-            courseLabel.text = bookCourse
+            bookCourseLabel.text = bookCourse
         }
         
         if let bookPrice = book.price as Int! {
@@ -61,6 +67,24 @@ class BookListingCell: UICollectionViewCell {
         }
         
         bookImageView.setImageWithURL(book.coverImage!)
-        
+    }
+    
+    override func updateConstraints() {
+        if !didSetupConstraints {
+            bookImageView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            bookImageView.autoSetDimension(.Height, toSize: 250)
+            
+            bookTitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookImageView, withOffset: 5)
+            bookTitleLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+            
+            bookCourseLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookTitleLabel, withOffset: 5)
+            bookCourseLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+            
+            bookPriceLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookCourseLabel, withOffset: 5)
+            bookPriceLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+
+            didSetupConstraints = true
+        }
+        super.updateConstraints()
     }
 }

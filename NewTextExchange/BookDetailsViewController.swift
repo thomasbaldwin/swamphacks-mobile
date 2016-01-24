@@ -10,7 +10,6 @@ import UIKit
 import Cosmos
 
 class BookDetailsViewController: UIViewController {
-    
     @IBOutlet weak var bookCoverImageView: UIImageView!
     @IBOutlet weak var bookTitleLabel: UILabel!
     @IBOutlet weak var courseNumberLabel: UILabel!
@@ -19,7 +18,6 @@ class BookDetailsViewController: UIViewController {
     @IBOutlet weak var contactInfoButton: UIBarButtonItem!
     @IBOutlet weak var ratingStarsView: CosmosView!
     @IBOutlet var priceLabel: UILabel!
-    
     
     var singleBook: Book?
 
