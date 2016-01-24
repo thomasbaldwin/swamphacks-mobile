@@ -14,6 +14,7 @@ public final class User: NSObject, ResponseObjectSerializable, ResponseCollectio
     var firstName: String?
     var lastName: String?
     var thumbnailPhotoURL: String?
+    var phone: String?
     
     override init() {
         super.init()
@@ -25,6 +26,7 @@ public final class User: NSObject, ResponseObjectSerializable, ResponseCollectio
         self.id = representation.valueForKeyPath("facebook_UID") as? Int
         self.firstName = representation.valueForKeyPath("first_name") as? String
         self.lastName = representation.valueForKeyPath("last_name") as? String
+        self.phone = representation.valueForKeyPath("phone") as? String
         self.thumbnailPhotoURL = representation.valueForKeyPath("user_thumbnail_photo_URL") as? String
     }
     
