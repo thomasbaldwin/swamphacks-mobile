@@ -14,6 +14,7 @@
 		A1FD0ED51C53FC5900EAB849 /* BookListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */; };
 		A1FD0ED71C54017100EAB849 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0ED61C54017100EAB849 /* Book.swift */; };
 		A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */; };
+		A62AD5EF1C54EF7A00F4823D /* VenmoPaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62AD5EE1C54EF7A00F4823D /* VenmoPaymentController.swift */; };
 		A69E66C41C5451EA00EBEE6C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69E66C31C5451EA00EBEE6C /* FBSDKLoginKit.framework */; };
 		A69E66C61C54522B00EBEE6C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69E66C51C54522B00EBEE6C /* Bolts.framework */; };
 		A69E66C81C54554500EBEE6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69E66C71C54554500EBEE6C /* LoginViewController.swift */; };
@@ -38,6 +39,7 @@
 		A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookListingCell.swift; sourceTree = "<group>"; };
 		A1FD0ED61C54017100EAB849 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		A62AD5EE1C54EF7A00F4823D /* VenmoPaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenmoPaymentController.swift; sourceTree = "<group>"; };
 		A69E66C21C544EEB00EBEE6C /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		A69E66C31C5451EA00EBEE6C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		A69E66C51C54522B00EBEE6C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/Bolts.framework"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				A12742871C53F40100A37B5C /* BooksViewController.swift */,
 				A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */,
 				A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */,
+				A62AD5EE1C54EF7A00F4823D /* VenmoPaymentController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				TargetAttributes = {
 					A12742811C53F40100A37B5C = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 7UGL892LMN;
 					};
 				};
 			};
@@ -277,6 +281,7 @@
 				A1FD0ED51C53FC5900EAB849 /* BookListingCell.swift in Sources */,
 				A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */,
 				A12742881C53F40100A37B5C /* BooksViewController.swift in Sources */,
+				A62AD5EF1C54EF7A00F4823D /* VenmoPaymentController.swift in Sources */,
 				A12742861C53F40100A37B5C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,12 +394,15 @@
 			baseConfigurationReference = 8F1D4CD39C4171871F9EB8A4 /* Pods-NewTextExchange.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "/Users/brianroytman/Documents/FacebookSDKs-iOS-20160115";
 				INFOPLIST_FILE = NewTextExchange/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eric.NewTextExchange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NewTextExchange/Bridging-Header.h";
 			};
 			name = Debug;
@@ -404,12 +412,15 @@
 			baseConfigurationReference = 58266334CD05C88D35DD41AB /* Pods-NewTextExchange.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "/Users/brianroytman/Documents/FacebookSDKs-iOS-20160115";
 				INFOPLIST_FILE = NewTextExchange/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eric.NewTextExchange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "NewTextExchange/Bridging-Header.h";
 			};
 			name = Release;

@@ -8,9 +8,11 @@
 
 import Foundation
 import Cosmos
+import MessageUI
 
 
-class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
+
+class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMessageComposeViewControllerDelegate {
     var book: Book?
  
     var bookImageView = UIImageView(image: UIImage(named: "RagtimeBookCover"))
@@ -27,6 +29,9 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
     var priceLabel = UILabel.newAutoLayoutView()
     
     var detailsViewTopConstraint: NSLayoutConstraint!
+    
+    
+    var payImageButton = UIButton.newAutoLayoutView()
     
     
     override func viewDidLoad() {
@@ -60,6 +65,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
         messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
+        payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGestureUp")
         swipeUp.direction = UISwipeGestureRecognizerDirection.Up
@@ -75,9 +81,18 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         detailsView.addSubview(nameLabel)
         detailsView.addSubview(phoneImageButton)
         detailsView.addSubview(messageImageButton)
+        detailsView.addSubview(payImageButton)
         detailsView.addSubview(bookTitleLabel)
         detailsView.addSubview(courseCodeLabel)
         detailsView.addSubview(priceLabel)
+        
+        
+        
+        phoneImageButton.addTarget(self, action: "callPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
+        messageImageButton.addTarget(self, action: "sendMessage", forControlEvents: UIControlEvents.TouchUpInside)
+        payImageButton.addTarget(self, action: "venmoPaymentController", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
         setupConstraints()
     }
     
@@ -115,6 +130,10 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         
         priceLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: courseCodeLabel, withOffset: 10)
         priceLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: courseCodeLabel)
+        
+        payImageButton.autoPinEdge(.Top, toEdge: .Bottom, ofView: priceLabel, withOffset: 60)
+        payImageButton.autoPinEdge(.Leading, toEdge: .Leading, ofView: priceLabel)
+        
     }
     
     func respondToSwipeGestureUp() {
@@ -137,13 +156,43 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         
     }
     
-    func callPhoneNumber(phoneNumber: String) {
-        if let phoneCallURL:NSURL = NSURL(string:"telprompt://8474310722") {
+    func callPhoneNumber() {
+        if let phoneCallURL:NSURL = NSURL(string:"telprompt://5614003685") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
             }
         }
+    }
+    
+    func sendMessage() {
+        let messageVC = MFMessageComposeViewController()
+        messageVC.body = "Message String"
+        messageVC.recipients = ["5614003685"] // Optionally add some tel numbers
+        messageVC.messageComposeDelegate = self
+        
+        presentViewController(messageVC, animated: true, completion: nil)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        switch result.rawValue {
+        case MessageComposeResultCancelled.rawValue :
+            print("message canceled")
+            
+        case MessageComposeResultFailed.rawValue :
+            print("message failed")
+            
+        case MessageComposeResultSent.rawValue :
+            print("message sent")
+            
+        default:
+            break
+        }
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func venmoPaymentController() {
+        //self.performSegueWithIdentifier("about", sender: sender)
     }
     
     

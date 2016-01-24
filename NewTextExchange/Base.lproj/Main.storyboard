@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qcd-WB-QOg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="qcd-WB-QOg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -15,10 +15,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CGi-Ct-0sw"/>
+                    <connections>
+                        <segue destination="TK1-IN-NPQ" kind="push" id="45Y-9p-xyS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Vy-TQ-nfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2300" y="395"/>
+            <point key="canvasLocation" x="2282.5" y="404.5"/>
+        </scene>
+        <!--Venmo Payment Controller-->
+        <scene sceneID="gi9-eb-Dj8">
+            <objects>
+                <viewController id="TK1-IN-NPQ" customClass="VenmoPaymentController" customModule="NewTextExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qn6-vH-0L0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tzD-FO-Hcy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GB2-Ai-0HD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2764.5" y="404.5"/>
         </scene>
         <!--Book Details View Controller-->
         <scene sceneID="Vo0-Ym-Rx1">
@@ -218,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTE-b5-OGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1810.5" y="394.5"/>
+            <point key="canvasLocation" x="1695.5" y="394.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cXu-aE-foc">
