@@ -63,7 +63,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
         messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
-        payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
+        //payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGestureUp")
         swipeUp.direction = UISwipeGestureRecognizerDirection.Up
@@ -72,6 +72,8 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         let swipeDown = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGestureDown")
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down
         view.addGestureRecognizer(swipeDown)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Purchase", style: UIBarButtonItemStyle.Plain, target: self, action: "presentVenmoViewController")
         
         view.addSubview(bookImageView)
         view.addSubview(detailsView)
@@ -84,12 +86,8 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         detailsView.addSubview(courseCodeLabel)
         detailsView.addSubview(priceLabel)
         
-        
-        
         phoneImageButton.addTarget(self, action: "callPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
         messageImageButton.addTarget(self, action: "sendMessage", forControlEvents: UIControlEvents.TouchUpInside)
-        payImageButton.addTarget(self, action: "venmoPaymentController", forControlEvents: UIControlEvents.TouchUpInside)
-        
         
         setupConstraints()
     }
@@ -189,8 +187,12 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func venmoPaymentController() {
-        //self.performSegueWithIdentifier("about", sender: sender)
+    
+    func presentVenmoViewController() {
+        if let venmoPaymentController = storyboard?.instantiateViewControllerWithIdentifier("VenmoPaymentController")
+            as? VenmoPaymentController {
+                navigationController?.pushViewController(venmoPaymentController, animated: true)
+        }
     }
     
     
