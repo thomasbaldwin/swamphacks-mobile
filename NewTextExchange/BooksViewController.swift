@@ -9,8 +9,9 @@
 import UIKit
 import AFNetworking
 
-class BooksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class BooksViewController: UIViewController {
     
+    var filteredBooks = [Book]()
     let books = [
         Book(
             title: "Operating Systems",
@@ -20,64 +21,68 @@ class BooksViewController: UIViewController, UICollectionViewDataSource, UIColle
     ]
 
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    
-    var booksForSale: [Book] = []
-    var filteredData: [Book]?
+    @IBOutlet var searchField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        setupViews()
+    }
+    
+    func setupViews() {
         navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
+        
+        searchField.delegate = self
+        searchField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        searchBar.delegate = self
-        
         collectionView.backgroundColor = UIColor.whiteColor()
-    
     }
+    
+    func filterBooks() {
+        guard let text = searchField.text where !text.isEmpty else {
+            filteredBooks = books
+            return
+        }
+        
+        filteredBooks.removeAll(keepCapacity: false)
+        
+        var predicateList = [NSPredicate]()
+        let words = text.componentsSeparatedByString(" ")
+        for word in words {
+            let titlePredicate = NSPredicate(format: "title contains[c] %@", word)
+            let coursePredicate = NSPredicate(format: "course contains[c] %@", word)
+            
+            let orCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [titlePredicate, coursePredicate])
+            
+            predicateList.append(orCompoundPredicate)
+        }
+        
+        let searchPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: predicateList)
+        let array = (books as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        filteredBooks = array as! [Book]
+    }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let totalwidth = collectionView.bounds.size.width;
         let numberOfCellsPerRow = 2
         let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
         
         return CGSizeMake(dimensions, 325)
-        
     }
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return (searchField.text!.isEmpty ? books.count: filteredBooks.count)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BookCell", forIndexPath: indexPath) as! BookListingCell
         
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.grayColor()
+        let book = searchField.text!.isEmpty ? books[indexPath.row] : filteredBooks[indexPath.row]
+        cell.book = book
         
-        cell.selectedBackgroundView = backgroundView
-        cell.ratingStarsView.backgroundColor = .None
-        
-        let singleBook = books[indexPath.row]
-        
-        let priceFormatter = NSNumberFormatter()
-        priceFormatter.numberStyle = .CurrencyStyle
-        var formattedPrice = priceFormatter.stringFromNumber(singleBook.price!)
-        
-        cell.bookTitleLabel.text = singleBook.title! as String
-        cell.bookPriceLabel.text = formattedPrice! as String
-        cell.courseLabel.text = singleBook.course! as String
-        cell.bookImageView.setImageWithURL(singleBook.coverImage!)
-        cell.bookTitleLabel.sizeToFit()
-
         return cell
     }
     
@@ -85,17 +90,24 @@ class BooksViewController: UIViewController, UICollectionViewDataSource, UIColle
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
     }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-//        let searchString = searchBar.text
-//        
-//        filteredData = searchText.isEmpty ? books : books.filter({(dataString: String) -> Bool in
-//            return dataString.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-//        })
+}
+
+extension BooksViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField.text!.isEmpty {
+            filteredBooks = books
+        }
     }
     
+    func textFieldDidChange(textField: UITextField) {
+        filterBooks()
+        collectionView!.reloadData()
+    }
     
-
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }
+
 

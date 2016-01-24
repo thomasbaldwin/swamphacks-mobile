@@ -13,8 +13,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" id="FhK-J7-d6Q">
+                                <rect key="frame" x="0.0" y="19" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Market" id="de4-pr-YQq"/>
+                                </items>
+                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EOn-e4-Rk8">
-                                <rect key="frame" x="0.0" y="107" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="63" width="375" height="560"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="kXD-23-eze">
                                     <size key="itemSize" width="177" height="325"/>
@@ -68,37 +75,32 @@
                                             <outlet property="bookPriceLabel" destination="Uro-mn-1nb" id="1FP-XN-P5w"/>
                                             <outlet property="bookTitleLabel" destination="p9b-tR-5en" id="mqV-ff-cDm"/>
                                             <outlet property="courseLabel" destination="ri2-Pg-HBT" id="Mcl-tJ-u8Y"/>
-                                            <outlet property="ratingStarsView" destination="ep0-1q-Hb2" id="PIQ-pX-ncw"/>
                                             <segue destination="KpX-64-tOH" kind="push" id="9fh-w6-fS3"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" id="Z9z-Ug-5Ri">
-                                <rect key="frame" x="0.0" y="63" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <navigationBar contentMode="scaleToFill" id="FhK-J7-d6Q">
-                                <rect key="frame" x="0.0" y="19" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Market" id="de4-pr-YQq"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="caB-St-Gsa"/>
+                    <navigationItem key="navigationItem" id="caB-St-Gsa">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Books" textAlignment="natural" minimumFontSize="17" id="oTE-9u-SWH">
+                            <rect key="frame" x="8" y="7" width="359" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="collectionView" destination="EOn-e4-Rk8" id="y41-v8-nB5"/>
-                        <outlet property="searchBar" destination="Z9z-Ug-5Ri" id="gUn-IV-w4X"/>
+                        <outlet property="searchField" destination="oTE-9u-SWH" id="rsR-CR-L68"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329.5" y="394.5"/>
+            <point key="canvasLocation" x="1916.5" y="394.5"/>
         </scene>
         <!--Book DetailsNEW Controller-->
         <scene sceneID="fq8-i9-W34">
@@ -113,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Vy-TQ-nfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1870.5" y="394.5"/>
+            <point key="canvasLocation" x="2457.5" y="394.5"/>
         </scene>
         <!--Book Details View Controller-->
         <scene sceneID="Vo0-Ym-Rx1">
@@ -234,7 +236,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2297.5" y="362.5"/>
+            <point key="canvasLocation" x="2884.5" y="362.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="67e-fV-kFb">
@@ -250,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mct-ID-5wl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2188.5" y="394.5"/>
+            <point key="canvasLocation" x="2775.5" y="394.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Xp0-97-Eod">
@@ -269,7 +271,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Enter"/>
                                 <connections>
-                                    <segue destination="rud-Fn-hJM" kind="modal" id="SG8-bC-2y4"/>
+                                    <segue destination="QvS-o9-6g6" kind="modal" id="r17-pr-tQO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gator Text Exchange" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lhe-dQ-uZp">
@@ -286,25 +288,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRq-v0-0oP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223.5" y="394.5"/>
+            <point key="canvasLocation" x="695.5" y="394.5"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="oj6-vI-Wv5">
+        <scene sceneID="0kL-rX-8oB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rud-Fn-hJM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QvS-o9-6g6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KYH-gq-kNd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kos-Rz-cOj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Lky-1K-arf"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="MVR-oa-GwT"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s0W-d2-cUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bVL-pN-Lx4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768.5" y="394.5"/>
+            <point key="canvasLocation" x="1329.5" y="394.5"/>
         </scene>
     </scenes>
     <resources>
