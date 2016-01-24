@@ -17,9 +17,9 @@
 		A69E66C41C5451EA00EBEE6C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69E66C31C5451EA00EBEE6C /* FBSDKLoginKit.framework */; };
 		A69E66C61C54522B00EBEE6C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69E66C51C54522B00EBEE6C /* Bolts.framework */; };
 		A69E66C81C54554500EBEE6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69E66C71C54554500EBEE6C /* LoginViewController.swift */; };
-		A6BB8C911C54641F00EA5142 /* Gator_runner.png in Resources */ = {isa = PBXBuildFile; fileRef = A6BB8C901C54641F00EA5142 /* Gator_runner.png */; };
 		A6BB8C941C5466E200EA5142 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BB8C921C5466E200EA5142 /* Main.storyboard */; };
 		A6BB8C961C546BBB00EA5142 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BB8C951C546BBB00EA5142 /* FBSDKCoreKit.framework */; };
+		A6BB8C991C5481BB00EA5142 /* BookDetailsNEWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */; };
 		B805701920AC3BA05357BDF1 /* Pods_NewTextExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75280F513FCE9742D7B642C0 /* Pods_NewTextExchange.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +40,9 @@
 		A69E66C31C5451EA00EBEE6C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		A69E66C51C54522B00EBEE6C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/Bolts.framework"; sourceTree = "<group>"; };
 		A69E66C71C54554500EBEE6C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A6BB8C901C54641F00EA5142 /* Gator_runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Gator_runner.png; path = ../../../Pictures/Gator_runner.png; sourceTree = "<group>"; };
 		A6BB8C931C5466E200EA5142 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6BB8C951C546BBB00EA5142 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsNEWController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,14 +92,13 @@
 		A12742841C53F40100A37B5C /* NewTextExchange */ = {
 			isa = PBXGroup;
 			children = (
-				A6BB8C921C5466E200EA5142 /* Main.storyboard */,
+				A12742851C53F40100A37B5C /* AppDelegate.swift */,
 				A1FD0ED81C54018700EAB849 /* Models */,
 				A1FD0ED91C54019100EAB849 /* Controllers */,
-				A12742851C53F40100A37B5C /* AppDelegate.swift */,
+				A6BB8C971C54802D00EA5142 /* Views */,
 				A69E66C21C544EEB00EBEE6C /* Bridging-Header.h */,
-				A6BB8C901C54641F00EA5142 /* Gator_runner.png */,
-				A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */,
 				A127428C1C53F40100A37B5C /* Assets.xcassets */,
+				A6BB8C921C5466E200EA5142 /* Main.storyboard */,
 				A127428E1C53F40100A37B5C /* LaunchScreen.storyboard */,
 				A12742911C53F40100A37B5C /* Info.plist */,
 			);
@@ -119,9 +118,18 @@
 			children = (
 				A69E66C71C54554500EBEE6C /* LoginViewController.swift */,
 				A12742871C53F40100A37B5C /* BooksViewController.swift */,
+				A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */,
 				A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A6BB8C971C54802D00EA5142 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		FEA07657E6A6BF37CD2896D9 /* Pods */ = {
@@ -195,7 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A12742901C53F40100A37B5C /* LaunchScreen.storyboard in Resources */,
-				A6BB8C911C54641F00EA5142 /* Gator_runner.png in Resources */,
 				A127428D1C53F40100A37B5C /* Assets.xcassets in Resources */,
 				A6BB8C941C5466E200EA5142 /* Main.storyboard in Resources */,
 			);
@@ -257,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1FD0ED71C54017100EAB849 /* Book.swift in Sources */,
+				A6BB8C991C5481BB00EA5142 /* BookDetailsNEWController.swift in Sources */,
 				A69E66C81C54554500EBEE6C /* LoginViewController.swift in Sources */,
 				A1FD0ED51C53FC5900EAB849 /* BookListingCell.swift in Sources */,
 				A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */,

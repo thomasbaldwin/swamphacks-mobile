@@ -15,13 +15,16 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - Cosmos (1.1.5)
+  - PureLayout (3.0.1)
 
 DEPENDENCIES:
   - AFNetworking
   - Cosmos (~> 1.1)
+  - PureLayout
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Cosmos: d05465696561ccb50fa8b7574026326bb23d654b
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
 
 COCOAPODS: 0.39.0

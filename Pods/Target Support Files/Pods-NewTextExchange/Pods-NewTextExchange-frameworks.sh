@@ -86,8 +86,10 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-NewTextExchange/AFNetworking.framework"
   install_framework "Pods-NewTextExchange/Cosmos.framework"
+  install_framework "Pods-NewTextExchange/PureLayout.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-NewTextExchange/AFNetworking.framework"
   install_framework "Pods-NewTextExchange/Cosmos.framework"
+  install_framework "Pods-NewTextExchange/PureLayout.framework"
 fi

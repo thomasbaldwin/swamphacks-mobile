@@ -69,7 +69,7 @@
                                             <outlet property="bookTitleLabel" destination="p9b-tR-5en" id="mqV-ff-cDm"/>
                                             <outlet property="courseLabel" destination="ri2-Pg-HBT" id="Mcl-tJ-u8Y"/>
                                             <outlet property="ratingStarsView" destination="ep0-1q-Hb2" id="PIQ-pX-ncw"/>
-                                            <segue destination="rld-Ac-Wfs" kind="modal" id="AEB-3y-3A6"/>
+                                            <segue destination="KpX-64-tOH" kind="push" id="9fh-w6-fS3"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -98,7 +98,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768.5" y="394.5"/>
+            <point key="canvasLocation" x="1329.5" y="394.5"/>
+        </scene>
+        <!--Book DetailsNEW Controller-->
+        <scene sceneID="fq8-i9-W34">
+            <objects>
+                <viewController storyboardIdentifier="BookDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KpX-64-tOH" customClass="BookDetailsNEWController" customModule="NewTextExchange" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="deA-RG-yr7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CGi-Ct-0sw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vy-TQ-nfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1870.5" y="394.5"/>
         </scene>
         <!--Book Details View Controller-->
         <scene sceneID="Vo0-Ym-Rx1">
@@ -113,26 +128,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" id="ckQ-94-oxu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="KpY-Bn-5Qp">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="sT4-yb-LGV"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Purchase" id="7zt-87-vah">
+                                            <connections>
+                                                <segue destination="jGJ-OV-V7g" kind="modal" id="nzI-bY-nC6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" id="AIc-Kf-mgP">
-                                <rect key="frame" x="0.0" y="603" width="375" height="302"/>
+                                <rect key="frame" x="0.0" y="398" width="375" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A8c-1R-OG1">
-                                        <rect key="frame" x="8" y="8" width="359" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gJQ-dI-iPs">
-                                        <rect key="frame" x="8" y="68" width="359" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quality:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3GM-3n-oU1">
-                                        <rect key="frame" x="8" y="99" width="59" height="21"/>
+                                        <rect key="frame" x="83" y="68" width="284" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -143,16 +158,44 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.10588235294117647" green="0.11764705882352941" blue="0.13333333333333333" alpha="0.0" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vn3-mo-RVz">
+                                        <rect key="frame" x="7" y="68" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nsO-nX-4ze">
+                                        <rect key="frame" x="86" y="128" width="39" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bwr-bw-Wyd">
+                                        <rect key="frame" x="6" y="128" width="44" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A8c-1R-OG1">
+                                        <rect key="frame" x="6" y="14" width="359" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quality:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3GM-3n-oU1">
+                                        <rect key="frame" x="6" y="99" width="59" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <navigationBar contentMode="scaleToFill" id="ckQ-94-oxu">
-                                <rect key="frame" x="-5" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="KpY-Bn-5Qp"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -174,6 +217,7 @@
                         <outlet property="contactInfoButton" destination="NCM-io-cwz" id="tCU-Ht-vaj"/>
                         <outlet property="courseNumberLabel" destination="gJQ-dI-iPs" id="8c7-ry-z2d"/>
                         <outlet property="detailsView" destination="AIc-Kf-mgP" id="fbq-UG-Y9U"/>
+                        <outlet property="priceLabel" destination="nsO-nX-4ze" id="jIJ-lY-Qcr"/>
                         <outlet property="ratingLabel" destination="3GM-3n-oU1" id="qsR-XQ-fP4"/>
                         <outlet property="ratingStarsView" destination="RRc-wZ-6Vw" id="VpJ-Q6-bed"/>
                     </connections>
@@ -190,7 +234,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1184.5" y="394.5"/>
+            <point key="canvasLocation" x="2297.5" y="362.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="67e-fV-kFb">
@@ -206,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mct-ID-5wl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1601.5" y="394.5"/>
+            <point key="canvasLocation" x="2188.5" y="394.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Xp0-97-Eod">
@@ -216,7 +260,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gator_runner.png" id="pYr-w9-ecY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GatorRunning" id="pYr-w9-ecY">
                                 <rect key="frame" x="0.0" y="20" width="375" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -225,7 +269,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Enter"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="modal" id="SG8-bC-2y4"/>
+                                    <segue destination="rud-Fn-hJM" kind="modal" id="SG8-bC-2y4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gator Text Exchange" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lhe-dQ-uZp">
@@ -244,8 +288,29 @@
             </objects>
             <point key="canvasLocation" x="223.5" y="394.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oj6-vI-Wv5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rud-Fn-hJM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KYH-gq-kNd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Lky-1K-arf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s0W-d2-cUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768.5" y="394.5"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Gator_runner.png" width="500" height="500"/>
+        <image name="GatorRunning" width="250" height="250"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nzI-bY-nC6"/>
+    </inferredMetricsTieBreakers>
 </document>

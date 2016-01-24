@@ -83,6 +83,7 @@ class BooksViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -94,18 +95,6 @@ class BooksViewController: UIViewController, UICollectionViewDataSource, UIColle
 //        })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        let cell = sender as! UICollectionViewCell
-        let indexPath = collectionView.indexPathForCell(cell)
-        let singleBook = books[indexPath!.row]
-        
-        let bookDetailsViewController = segue.destinationViewController as! BookDetailsViewController
-        bookDetailsViewController.singleBook = singleBook
-        
-    }
     
 
 }

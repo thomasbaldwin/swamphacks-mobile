@@ -18,6 +18,7 @@ class BookDetailsViewController: UIViewController {
     @IBOutlet weak var detailsView: UIView!
     @IBOutlet weak var contactInfoButton: UIBarButtonItem!
     @IBOutlet weak var ratingStarsView: CosmosView!
+    @IBOutlet var priceLabel: UILabel!
     
     
     var singleBook: Book?
@@ -30,6 +31,7 @@ class BookDetailsViewController: UIViewController {
         
         bookTitleLabel.text = singleBook?.title
         courseNumberLabel.text = singleBook?.course
+        priceLabel.text = String(singleBook?.price)
         
         
     }
@@ -41,22 +43,26 @@ class BookDetailsViewController: UIViewController {
     
     //fix this
     @IBAction func showDetails(sender: AnyObject) {
-        
+        /*
         let xPosition = detailsView.frame.origin.x
         
         //View will slide 300px up
-        let yPosition = detailsView.frame.origin.y - 300
+        let yPosition = detailsView.frame.origin.y - 500
         
         let height = detailsView.frame.size.height
-        //let width = UIScreen.mainScreen().bounds.width
+        let width = UIScreen.mainScreen().bounds.width
         
         UIView.animateWithDuration(1.0, animations: {
-            
-            self.detailsView.frame = CGRectMake(xPosition, yPosition, height, 375)
+    
+            self.detailsView.frame = CGRectMake(xPosition, yPosition, height, width)
             
         })
+        */
+        
+        
         
     }
+    
     
     
     @IBAction func hideDetails(sender: AnyObject) {

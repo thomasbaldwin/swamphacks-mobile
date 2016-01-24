@@ -9,8 +9,8 @@
 #ifndef Bridging_Header_h
 #define Bridging_Header_h
 
-
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <PureLayout/PureLayout.h>
 
 #endif /* Bridging_Header_h */
