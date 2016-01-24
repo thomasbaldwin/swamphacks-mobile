@@ -13,9 +13,11 @@ final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerial
     var title: String?
     var course: String?
     var price: Int?
+    var quality: Double?
     var coverPhotoURL: String?
     var thumbnailPhotoURL: String?
-    var isbn: Int?
+    var isbn: String?
+    var author: String?
     
     override init() {
         super.init()
@@ -28,8 +30,11 @@ final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerial
         self.title = representation.valueForKeyPath("title") as? String
         self.course = representation.valueForKeyPath("course") as? String
         self.price = representation.valueForKeyPath("price") as? Int
+        self.quality = representation.valueForKeyPath("quality") as? Double
         self.thumbnailPhotoURL = representation.valueForKeyPath("thumbnail_photo_URL") as? String
         self.coverPhotoURL = representation.valueForKeyPath("cover_photo_URL") as? String
+        self.isbn = representation.valueForKeyPath("isbn") as? String
+        self.author = representation.valueForKeyPath("author") as? String
     }
     
     static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {

@@ -13,7 +13,11 @@ import MessageUI
 
 
 class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMessageComposeViewControllerDelegate {
-    var book: Book?
+    var book: Book? {
+        didSet {
+            updateUI()
+        }
+    }
  
     var bookImageView = UIImageView(image: UIImage(named: "RagtimeBookCover"))
     var detailsView = UIView.newAutoLayoutView()
@@ -25,11 +29,12 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
     
     var bookTitleLabel = UILabel.newAutoLayoutView()
     var courseCodeLabel = UILabel.newAutoLayoutView()
-    var ratingStarsView: CosmosView!
+    var ratingStarsView: CosmosView = CosmosView()
     var priceLabel = UILabel.newAutoLayoutView()
+    var authorLabel = UILabel.newAutoLayoutView()
+    var isbnLabel = UILabel.newAutoLayoutView()
     
     var detailsViewTopConstraint: NSLayoutConstraint!
-    
     
     var payImageButton = UIButton.newAutoLayoutView()
     
@@ -47,25 +52,34 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         thumbnailImageView.layer.cornerRadius = 20
         thumbnailImageView.clipsToBounds = true
         
-        nameLabel.text = "Brian Roytman"
         nameLabel.textColor = UIColor.whiteColor()
         
-        bookTitleLabel.font = UIFont.systemFontOfSize(24)
-        bookTitleLabel.text = "Ragtime"
+        bookTitleLabel.font = UIFont.boldSystemFontOfSize(19)
         bookTitleLabel.textColor = UIColor.whiteColor()
         
-        courseCodeLabel.font = UIFont.systemFontOfSize(24)
-        courseCodeLabel.text = "ENC1102"
+        courseCodeLabel.font = UIFont.systemFontOfSize(17)
         courseCodeLabel.textColor = UIColor.whiteColor()
         
+        authorLabel.font = UIFont.systemFontOfSize(17)
+        authorLabel.textColor = UIColor.whiteColor()
+        
+        isbnLabel.font = UIFont.systemFontOfSize(17)
+        isbnLabel.textColor = UIColor.whiteColor()
+        
         //DO THIS FOR STAR RATINGS AS WELL
-        priceLabel.font = UIFont.systemFontOfSize(24)
-        priceLabel.text = "$10"
-        priceLabel.textColor = UIColor.whiteColor()
+        
+        ratingStarsView.settings.updateOnTouch = false
+        ratingStarsView.settings.fillMode = .Half
         
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
+        
         messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
-        payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
+        
+        payImageButton.backgroundColor = .orangeColor()
+        payImageButton.setTitle("Purchase Book", forState: .Normal)
+        payImageButton.hidden = true
+        payImageButton.alpha = 1.0
+        
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGestureUp")
         swipeUp.direction = UISwipeGestureRecognizerDirection.Up
@@ -75,6 +89,10 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down
         view.addGestureRecognizer(swipeDown)
         
+        phoneImageButton.addTarget(self, action: "callPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
+        messageImageButton.addTarget(self, action: "sendMessage", forControlEvents: UIControlEvents.TouchUpInside)
+        payImageButton.addTarget(self, action: "venmoPaymentController", forControlEvents: UIControlEvents.TouchUpInside)
+        
         view.addSubview(bookImageView)
         view.addSubview(detailsView)
         detailsView.addSubview(thumbnailImageView)
@@ -82,18 +100,52 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         detailsView.addSubview(phoneImageButton)
         detailsView.addSubview(messageImageButton)
         detailsView.addSubview(payImageButton)
+        detailsView.addSubview(ratingStarsView)
         detailsView.addSubview(bookTitleLabel)
         detailsView.addSubview(courseCodeLabel)
         detailsView.addSubview(priceLabel)
-        
-        
-        
-        phoneImageButton.addTarget(self, action: "callPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
-        messageImageButton.addTarget(self, action: "sendMessage", forControlEvents: UIControlEvents.TouchUpInside)
-        payImageButton.addTarget(self, action: "venmoPaymentController", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        
+        detailsView.addSubview(isbnLabel)
+        detailsView.addSubview(authorLabel)
         setupConstraints()
+    }
+    
+    func updateUI() {
+        guard let book = self.book else {
+            return
+        }
+        
+        if let bookTitle = book.title {
+            bookTitleLabel.text = bookTitle
+        }
+        
+        if let bookCourse = book.course {
+            courseCodeLabel.text = bookCourse
+        }
+        
+        if let bookAuthor = book.author {
+            authorLabel.text = "Author: \(bookAuthor)"
+        }
+        
+        if let isbn = book.isbn {
+            isbnLabel.text = "ISBN: \(isbn)"
+        }
+        
+        if let price = book.price {
+            let priceFormatter = NSNumberFormatter()
+            priceFormatter.numberStyle = .CurrencyStyle
+            let formattedPrice = priceFormatter.stringFromNumber(price)
+            priceLabel.font = UIFont.boldSystemFontOfSize(17)
+            priceLabel.text = "Price: \(formattedPrice!)"
+            priceLabel.textColor = UIColor.whiteColor()
+        } else {
+            priceLabel.font = UIFont.boldSystemFontOfSize(17)
+            priceLabel.text = "Price: Best Offer"
+            priceLabel.textColor = UIColor.whiteColor()
+        }
+        
+        if let bookQuality = book.quality {
+            ratingStarsView.rating = bookQuality
+        }
     }
     
     func setupConstraints() {
@@ -124,22 +176,34 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         bookTitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: thumbnailImageView, withOffset: 40)
         bookTitleLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
-        courseCodeLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookTitleLabel, withOffset: 10)
-        courseCodeLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: bookTitleLabel)
+        authorLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookTitleLabel, withOffset: 40)
+        authorLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: bookTitleLabel)
         
+        courseCodeLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: 10)
+        courseCodeLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: authorLabel)
         
         priceLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: courseCodeLabel, withOffset: 10)
         priceLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: courseCodeLabel)
         
-        payImageButton.autoPinEdge(.Top, toEdge: .Bottom, ofView: priceLabel, withOffset: 60)
-        payImageButton.autoPinEdge(.Leading, toEdge: .Leading, ofView: priceLabel)
+        isbnLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: priceLabel, withOffset: 10)
+        isbnLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: priceLabel)
         
+        ratingStarsView.autoPinEdge(.Top, toEdge: .Bottom, ofView: isbnLabel, withOffset: 10)
+        ratingStarsView.autoPinEdge(.Leading, toEdge: .Leading, ofView: isbnLabel)
+        
+        
+        payImageButton.autoPinEdge(.Top, toEdge: .Bottom, ofView: ratingStarsView, withOffset: 200)
+        payImageButton.autoPinEdge(.Leading, toEdge: .Leading, ofView: ratingStarsView)
+        
+        payImageButton.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
+        payImageButton.autoSetDimension(.Height, toSize: 50)
     }
     
     func respondToSwipeGestureUp() {
         self.detailsViewTopConstraint.constant = 0
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
             self.view.layoutIfNeeded()
+            self.payImageButton.hidden = false
         }, completion: { finished in
             print("Basket doors opened!")
         })
@@ -150,8 +214,10 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         self.detailsViewTopConstraint.constant = UIScreen.mainScreen().bounds.height - 124
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
             self.view.layoutIfNeeded()
+            self.payImageButton.hidden = true
         }, completion: { finished in
             print("Basket doors closed!")
+            
         })
         
     }

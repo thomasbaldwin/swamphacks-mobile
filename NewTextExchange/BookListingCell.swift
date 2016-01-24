@@ -16,6 +16,8 @@ class BookListingCell: UICollectionViewCell {
     var bookTitleLabel = UILabel.newAutoLayoutView()
     var bookPriceLabel = UILabel.newAutoLayoutView()
     var bookCourseLabel = UILabel.newAutoLayoutView()
+    var starRatingView = CosmosView()
+    //starRatingView.addSubview(CosmosView() as UIView)
     
     var book: Book? {
         didSet {
@@ -38,10 +40,26 @@ class BookListingCell: UICollectionViewCell {
         backgroundView.backgroundColor = UIColor.grayColor()
         selectedBackgroundView = backgroundView
         
+        bookTitleLabel.numberOfLines = 0
+        bookTitleLabel.font = UIFont.boldSystemFontOfSize(16)
+        bookTitleLabel.textAlignment = .Center
+        
+        bookCourseLabel.numberOfLines = 0
+        bookCourseLabel.font = UIFont.systemFontOfSize(13)
+        bookCourseLabel.textAlignment = .Center
+        
+        bookPriceLabel.numberOfLines = 0
+        bookPriceLabel.font = UIFont.boldSystemFontOfSize(13)
+        bookPriceLabel.textAlignment = .Center
+        
+        starRatingView.settings.updateOnTouch = false
+        starRatingView.settings.fillMode = .Half
+        
         contentView.addSubview(bookImageView)
         contentView.addSubview(bookTitleLabel)
         contentView.addSubview(bookPriceLabel)
         contentView.addSubview(bookCourseLabel)
+        contentView.addSubview(starRatingView)
         updateConstraints()
     }
     
@@ -52,7 +70,6 @@ class BookListingCell: UICollectionViewCell {
         
         if let bookTitle = book.title as String! {
             bookTitleLabel.text = bookTitle
-            bookTitleLabel.sizeToFit()
         }
         
         if let bookCourse = book.course as String! {
@@ -64,6 +81,10 @@ class BookListingCell: UICollectionViewCell {
             priceFormatter.numberStyle = .CurrencyStyle
             let formattedPrice = priceFormatter.stringFromNumber(bookPrice)
             bookPriceLabel.text = formattedPrice
+        }
+        
+        if let bookQuality = book.quality as Double! {
+            starRatingView.rating = bookQuality
         }
         
         if let bookCoverPhotoURL = book.thumbnailPhotoURL as String! {
@@ -82,13 +103,17 @@ class BookListingCell: UICollectionViewCell {
             bookImageView.autoSetDimension(.Height, toSize: 250)
             
             bookTitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookImageView, withOffset: 5)
-            bookTitleLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+            bookTitleLabel.autoPinEdgeToSuperviewEdge(.Leading)
+            bookTitleLabel.autoPinEdgeToSuperviewEdge(.Trailing)
             
             bookCourseLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookTitleLabel, withOffset: 5)
             bookCourseLabel.autoAlignAxisToSuperviewAxis(.Vertical)
             
             bookPriceLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookCourseLabel, withOffset: 5)
             bookPriceLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+            
+            starRatingView.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookPriceLabel, withOffset: 5)
+            starRatingView.autoAlignAxisToSuperviewAxis(.Vertical)
 
             didSetupConstraints = true
         }

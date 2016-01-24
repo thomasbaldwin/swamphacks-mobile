@@ -116,6 +116,7 @@ extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BookListingCell
         let book = searchField.text!.isEmpty ? books[indexPath.row] : filteredBooks[indexPath.row]
+        
         cell.book = book
         
         return cell
