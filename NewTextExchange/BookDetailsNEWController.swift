@@ -10,8 +10,6 @@ import Foundation
 import Cosmos
 import MessageUI
 
-
-
 class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMessageComposeViewControllerDelegate {
     var book: Book?
  

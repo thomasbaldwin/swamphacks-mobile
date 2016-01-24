@@ -8,31 +8,38 @@
 
 import Foundation
 
-final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable {
+public final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable {
     var id: Int?
     var title: String?
     var course: String?
     var price: Int?
-    var coverPhotoURL: String?
     var thumbnailPhotoURL: String?
+    var coverPhotoURL: String?
     var isbn: Int?
+    var creator: User?
     
     override init() {
         super.init()
     }
     
-    init?(representation: AnyObject) {
+    public init?(representation: AnyObject) {
         super.init()
         
         self.id = representation.valueForKeyPath("id") as? Int
         self.title = representation.valueForKeyPath("title") as? String
         self.course = representation.valueForKeyPath("course") as? String
         self.price = representation.valueForKeyPath("price") as? Int
-        self.thumbnailPhotoURL = representation.valueForKeyPath("thumbnail_photo_URL") as? String
+        self.thumbnailPhotoURL = representation.valueForKeyPath("book_thumbnail_photo_URL") as? String
         self.coverPhotoURL = representation.valueForKeyPath("cover_photo_URL") as? String
+        
+        if let creatorRepresentation = (representation.valueForKeyPath("creator") as? [String: AnyObject]) {
+            if let creator = User(representation: creatorRepresentation) {
+                self.creator = creator
+            }
+        }
     }
     
-    static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {
+    public static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {
         var books: [Book] = []
         
         if let dataRepresentation = representation as? [[String: AnyObject]] {
