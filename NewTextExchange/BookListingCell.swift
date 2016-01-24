@@ -88,7 +88,6 @@ class BookListingCell: UICollectionViewCell {
         }
         
         if let bookCoverPhotoURL = book.thumbnailPhotoURL as String! {
-            print(bookCoverPhotoURL)
             Database.getImageFromURL(bookCoverPhotoURL).then { image -> Void in
                 self.bookImageView.image = image
             }.error { error -> Void in

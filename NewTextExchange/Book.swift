@@ -13,11 +13,12 @@ public final class Book: NSObject, ResponseObjectSerializable, ResponseCollectio
     var title: String?
     var course: String?
     var price: Int?
-    var quality: Double?
-    var coverPhotoURL: String?
     var thumbnailPhotoURL: String?
-    var isbn: String?
+    var coverPhotoURL: String?
     var author: String?
+    var isbn: String?
+    var quality: Double?
+    var creator: User?
     
     override init() {
         super.init()
@@ -30,11 +31,17 @@ public final class Book: NSObject, ResponseObjectSerializable, ResponseCollectio
         self.title = representation.valueForKeyPath("title") as? String
         self.course = representation.valueForKeyPath("course") as? String
         self.price = representation.valueForKeyPath("price") as? Int
-        self.quality = representation.valueForKeyPath("quality") as? Double
-        self.thumbnailPhotoURL = representation.valueForKeyPath("thumbnail_photo_URL") as? String
+        self.thumbnailPhotoURL = representation.valueForKeyPath("book_thumbnail_photo_URL") as? String
         self.coverPhotoURL = representation.valueForKeyPath("cover_photo_URL") as? String
-        self.isbn = representation.valueForKeyPath("isbn") as? String
         self.author = representation.valueForKeyPath("author") as? String
+        self.isbn = representation.valueForKeyPath("isbn") as? String
+        self.quality = representation.valueForKeyPath("quality") as? Double
+        
+        if let creatorRepresentation = (representation.valueForKeyPath("creator") as? [String: AnyObject]) {
+            if let creator = User(representation: creatorRepresentation) {
+                self.creator = creator
+            }
+        }
     }
     
     public static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {

@@ -9,6 +9,7 @@
 import Foundation
 import Cosmos
 import MessageUI
+import AFNetworking
 
 class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMessageComposeViewControllerDelegate {
     var book: Book? {
@@ -17,7 +18,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         }
     }
  
-    var bookImageView = UIImageView(image: UIImage(named: "RagtimeBookCover"))
+    var bookImageView = UIImageView()
     var detailsView = UIView.newAutoLayoutView()
     
     var thumbnailImageView = UIImageView(image: UIImage(named: "ProfilePic"))
@@ -72,6 +73,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
         
         messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
+        //payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
         
         payImageButton.backgroundColor = .orangeColor()
         payImageButton.setTitle("Purchase Book", forState: .Normal)
@@ -143,6 +145,14 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         
         if let bookQuality = book.quality {
             ratingStarsView.rating = bookQuality
+        }
+        
+        if let bookCoverImageURL = book.coverPhotoURL {
+            Database.getImageFromURL(bookCoverImageURL).then{ image -> Void in
+                self.bookImageView.image = image
+            }.error { error -> Void in
+                print(error)
+            }
         }
     }
     
