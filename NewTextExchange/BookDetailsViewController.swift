@@ -25,12 +25,9 @@ class BookDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        bookCoverImageView.setImageWithURL((singleBook?.coverImage)!)
-        
         bookTitleLabel.text = singleBook?.title
         courseNumberLabel.text = singleBook?.course
         priceLabel.text = String(singleBook?.price)
-        
         
     }
 

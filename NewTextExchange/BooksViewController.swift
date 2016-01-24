@@ -7,28 +7,24 @@
 //
 
 import UIKit
-import AFNetworking
 
 let reuseIdentifier = "Cell"
 
 class BooksViewController: UIViewController {
     var filteredBooks = [Book]()
-    let books = [
-        Book(
-            title: "Operating Systems",
-            course: "COP4600", price: 45, coverImage: NSURL(string: "http://ecx.images-amazon.com/images/I/51T73lIemvL._SX328_BO1,204,203,200_.jpg")),
-        Book(title: "English Composition 1", course: "ENC1102", price: 60, coverImage: NSURL(string: "http://image.slidesharecdn.com/modernworldhistorytextbooksocialtb-140208031911-phpapp01/95/modern-world-history-textbook-social-tb-1-638.jpg?cb=1391830310"))
-    
-    ]
+    var books = [Book]()
 
     var collectionView: UICollectionView!
     let collectionViewInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 4)
+    
+    let refreshControl = UIRefreshControl()
 
     @IBOutlet weak var searchField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        refresh(refreshControl)
     }
     
     func setupViews() {
@@ -54,8 +50,13 @@ class BooksViewController: UIViewController {
         collectionView!.setCollectionViewLayout(layout, animated: false)
         collectionView!.registerClass(BookListingCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .whiteColor()
-
+        collectionView.alwaysBounceVertical = true;
+        collectionView.bounces = true
+        
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
         view.addSubview(collectionView)
+        collectionView.addSubview(refreshControl)
         setupConstraints()
     }
     
@@ -86,6 +87,16 @@ class BooksViewController: UIViewController {
         let array = (books as NSArray).filteredArrayUsingPredicate(searchPredicate)
         filteredBooks = array as! [Book]
     }
+    
+    func refresh(sender: UIRefreshControl) {
+        Database.getBooks().then { books -> Void in
+            self.books = books
+            self.collectionView.reloadData()
+            sender.endRefreshing()
+        }.error { error -> Void in
+            print("Getting Books Error: \(error)")
+        }
+    }
 }
 
 extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -112,8 +123,12 @@ extension BooksViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        let bookDetailsViewController = storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
-        navigationController?.pushViewController(bookDetailsViewController!, animated: true)
+        if let bookDetailsViewController = storyboard?.instantiateViewControllerWithIdentifier("BookDetailsViewController")
+            as? BookDetailsNEWController {
+            let book = searchField.text!.isEmpty ? books[indexPath.row] : filteredBooks[indexPath.row]
+            bookDetailsViewController.book = book
+            navigationController?.pushViewController(bookDetailsViewController, animated: true)
+        }
     }
 }
 

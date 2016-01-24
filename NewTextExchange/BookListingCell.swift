@@ -66,7 +66,14 @@ class BookListingCell: UICollectionViewCell {
             bookPriceLabel.text = formattedPrice
         }
         
-        bookImageView.setImageWithURL(book.coverImage!)
+        if let bookCoverPhotoURL = book.thumbnailPhotoURL as String! {
+            print(bookCoverPhotoURL)
+            Database.getImageFromURL(bookCoverPhotoURL).then { image -> Void in
+                self.bookImageView.image = image
+            }.error { error -> Void in
+                print(error)
+            }
+        }
     }
     
     override func updateConstraints() {

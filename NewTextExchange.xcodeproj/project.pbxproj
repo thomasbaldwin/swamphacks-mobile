@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB84C7A1C54F8FE00C06088 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB84C791C54F8FE00C06088 /* Router.swift */; };
+		4EB84C7C1C54FA1F00C06088 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB84C7B1C54FA1F00C06088 /* Database.swift */; };
 		A12742861C53F40100A37B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12742851C53F40100A37B5C /* AppDelegate.swift */; };
 		A12742881C53F40100A37B5C /* BooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12742871C53F40100A37B5C /* BooksViewController.swift */; };
 		A127428D1C53F40100A37B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A127428C1C53F40100A37B5C /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4EB84C791C54F8FE00C06088 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		4EB84C7B1C54FA1F00C06088 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		58266334CD05C88D35DD41AB /* Pods-NewTextExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewTextExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-NewTextExchange/Pods-NewTextExchange.release.xcconfig"; sourceTree = "<group>"; };
 		75280F513FCE9742D7B642C0 /* Pods_NewTextExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewTextExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1D4CD39C4171871F9EB8A4 /* Pods-NewTextExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewTextExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewTextExchange/Pods-NewTextExchange.debug.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +70,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EB84C781C54F8E900C06088 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4EB84C791C54F8FE00C06088 /* Router.swift */,
+				4EB84C7B1C54FA1F00C06088 /* Database.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		8CF644AC69A16B9D63DC6F36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +117,7 @@
 				A1FD0ED81C54018700EAB849 /* Models */,
 				A1FD0ED91C54019100EAB849 /* Controllers */,
 				A6BB8C971C54802D00EA5142 /* Views */,
+				4EB84C781C54F8E900C06088 /* Networking */,
 				A69E66C21C544EEB00EBEE6C /* Bridging-Header.h */,
 				A127428C1C53F40100A37B5C /* Assets.xcassets */,
 				A6BB8C921C5466E200EA5142 /* Main.storyboard */,
@@ -271,11 +285,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB84C7A1C54F8FE00C06088 /* Router.swift in Sources */,
 				A1FD0ED71C54017100EAB849 /* Book.swift in Sources */,
 				A6BB8C991C5481BB00EA5142 /* BookDetailsNEWController.swift in Sources */,
 				A69E66C81C54554500EBEE6C /* LoginViewController.swift in Sources */,
 				A1FD0ED51C53FC5900EAB849 /* BookListingCell.swift in Sources */,
 				A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */,
+				4EB84C7C1C54FA1F00C06088 /* Database.swift in Sources */,
 				A12742881C53F40100A37B5C /* BooksViewController.swift in Sources */,
 				A12742861C53F40100A37B5C /* AppDelegate.swift in Sources */,
 			);
