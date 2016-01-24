@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable {
+public final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerializable {
     var id: Int?
     var title: String?
     var course: String?
@@ -23,7 +23,7 @@ final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerial
         super.init()
     }
     
-    init?(representation: AnyObject) {
+    public init?(representation: AnyObject) {
         super.init()
         
         self.id = representation.valueForKeyPath("id") as? Int
@@ -37,7 +37,7 @@ final class Book: NSObject, ResponseObjectSerializable, ResponseCollectionSerial
         self.author = representation.valueForKeyPath("author") as? String
     }
     
-    static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {
+    public static func collection(response response: NSHTTPURLResponse, representation: AnyObject) -> [Book] {
         var books: [Book] = []
         
         if let dataRepresentation = representation as? [[String: AnyObject]] {

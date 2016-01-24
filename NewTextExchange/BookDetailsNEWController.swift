@@ -10,8 +10,6 @@ import Foundation
 import Cosmos
 import MessageUI
 
-
-
 class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMessageComposeViewControllerDelegate {
     var book: Book? {
         didSet {
@@ -257,8 +255,12 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func venmoPaymentController() {
-        //self.performSegueWithIdentifier("about", sender: sender)
+    
+    func presentVenmoViewController() {
+        if let venmoPaymentController = storyboard?.instantiateViewControllerWithIdentifier("VenmoPaymentController")
+            as? VenmoPaymentController {
+                navigationController?.pushViewController(venmoPaymentController, animated: true)
+        }
     }
     
     
