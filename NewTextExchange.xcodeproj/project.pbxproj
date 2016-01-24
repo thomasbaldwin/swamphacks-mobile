@@ -20,6 +20,8 @@
 		A6BB8C941C5466E200EA5142 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6BB8C921C5466E200EA5142 /* Main.storyboard */; };
 		A6BB8C961C546BBB00EA5142 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BB8C951C546BBB00EA5142 /* FBSDKCoreKit.framework */; };
 		A6BB8C991C5481BB00EA5142 /* BookDetailsNEWController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */; };
+		A6BB8CA51C54D6BA00EA5142 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BB8CA41C54D6BA00EA5142 /* FBSDKMessengerShareKit.framework */; };
+		A6BB8CA71C54DECD00EA5142 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BB8CA61C54DECD00EA5142 /* FBSDKShareKit.framework */; };
 		B805701920AC3BA05357BDF1 /* Pods_NewTextExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75280F513FCE9742D7B642C0 /* Pods_NewTextExchange.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		A6BB8C931C5466E200EA5142 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6BB8C951C546BBB00EA5142 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		A6BB8C981C5481BB00EA5142 /* BookDetailsNEWController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsNEWController.swift; sourceTree = "<group>"; };
+		A6BB8CA41C54D6BA00EA5142 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKMessengerShareKit.framework"; sourceTree = "<group>"; };
+		A6BB8CA61C54DECD00EA5142 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Documents/FacebookSDKs-iOS-20160115/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,8 @@
 			files = (
 				A6BB8C961C546BBB00EA5142 /* FBSDKCoreKit.framework in Frameworks */,
 				B805701920AC3BA05357BDF1 /* Pods_NewTextExchange.framework in Frameworks */,
+				A6BB8CA71C54DECD00EA5142 /* FBSDKShareKit.framework in Frameworks */,
+				A6BB8CA51C54D6BA00EA5142 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				A69E66C41C5451EA00EBEE6C /* FBSDKLoginKit.framework in Frameworks */,
 				A69E66C61C54522B00EBEE6C /* Bolts.framework in Frameworks */,
 			);
@@ -63,6 +69,8 @@
 		8CF644AC69A16B9D63DC6F36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6BB8CA61C54DECD00EA5142 /* FBSDKShareKit.framework */,
+				A6BB8CA41C54D6BA00EA5142 /* FBSDKMessengerShareKit.framework */,
 				A69E66C51C54522B00EBEE6C /* Bolts.framework */,
 				A6BB8C951C546BBB00EA5142 /* FBSDKCoreKit.framework */,
 				A69E66C31C5451EA00EBEE6C /* FBSDKLoginKit.framework */,

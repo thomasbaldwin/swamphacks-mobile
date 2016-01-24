@@ -18,14 +18,13 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
     
     var thumbnailImageView = UIImageView(image: UIImage(named: "ProfilePic"))
     var nameLabel = UILabel.newAutoLayoutView()
-    var phoneImageView = UIImageView(image: UIImage(named: "PhoneIcon"))
-    var messageImageView = UIImageView(image: UIImage(named: "MessageIcon"))
+    var phoneImageButton = UIButton.newAutoLayoutView()
+    var messageImageButton = UIButton.newAutoLayoutView()
     
     var bookTitleLabel = UILabel.newAutoLayoutView()
     var courseCodeLabel = UILabel.newAutoLayoutView()
     var ratingStarsView: CosmosView!
     var priceLabel = UILabel.newAutoLayoutView()
-
     
     var detailsViewTopConstraint: NSLayoutConstraint!
     
@@ -59,6 +58,9 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         priceLabel.text = "$10"
         priceLabel.textColor = UIColor.whiteColor()
         
+        phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
+        messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGestureUp")
         swipeUp.direction = UISwipeGestureRecognizerDirection.Up
         view.addGestureRecognizer(swipeUp)
@@ -71,8 +73,8 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         view.addSubview(detailsView)
         detailsView.addSubview(thumbnailImageView)
         detailsView.addSubview(nameLabel)
-        detailsView.addSubview(phoneImageView)
-        detailsView.addSubview(messageImageView)
+        detailsView.addSubview(phoneImageButton)
+        detailsView.addSubview(messageImageButton)
         detailsView.addSubview(bookTitleLabel)
         detailsView.addSubview(courseCodeLabel)
         detailsView.addSubview(priceLabel)
@@ -96,13 +98,13 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         
         nameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
         nameLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: thumbnailImageView, withOffset: 20)
-        nameLabel.autoPinEdge(.Trailing, toEdge: .Leading, ofView: phoneImageView, withOffset: 10)
+        nameLabel.autoPinEdge(.Trailing, toEdge: .Leading, ofView: phoneImageButton, withOffset: 10)
         
-        phoneImageView.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
-        phoneImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: messageImageView, withOffset: -20)
+        phoneImageButton.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
+        phoneImageButton.autoPinEdge(.Trailing, toEdge: .Leading, ofView: messageImageButton, withOffset: -15)
         
-        messageImageView.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
-        messageImageView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 20)
+        messageImageButton.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
+        messageImageButton.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 20)
 
         bookTitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: thumbnailImageView, withOffset: 40)
         bookTitleLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
@@ -134,5 +136,16 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate {
         })
         
     }
+    
+    func callPhoneNumber(phoneNumber: String) {
+        if let phoneCallURL:NSURL = NSURL(string:"telprompt://8474310722") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
+    }
+    
+    
     
 }

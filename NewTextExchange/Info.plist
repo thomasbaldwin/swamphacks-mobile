@@ -81,6 +81,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
+		<string>fb-messenger-api</string>
 	</array>
 </dict>
 </plist>

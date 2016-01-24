@@ -11,6 +11,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 #import <PureLayout/PureLayout.h>
 
 #endif /* Bridging_Header_h */
