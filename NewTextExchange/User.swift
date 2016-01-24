@@ -23,7 +23,7 @@ public final class User: NSObject, ResponseObjectSerializable, ResponseCollectio
     public init?(representation: AnyObject) {
         super.init()
         self.id = representation.valueForKeyPath("id") as? Int
-        self.id = representation.valueForKeyPath("facebook_UID") as? Int
+        self.facebookUID = representation.valueForKeyPath("facebook_UID") as? String
         self.firstName = representation.valueForKeyPath("first_name") as? String
         self.lastName = representation.valueForKeyPath("last_name") as? String
         self.phone = representation.valueForKeyPath("phone") as? String

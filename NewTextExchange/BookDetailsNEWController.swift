@@ -24,7 +24,7 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
     var thumbnailImageView = UIImageView(image: UIImage(named: "ProfilePic"))
     var nameLabel = UILabel.newAutoLayoutView()
     var phoneImageButton = UIButton.newAutoLayoutView()
-    var messageImageButton = UIButton.newAutoLayoutView()
+    var facebookImageButton = UIButton.newAutoLayoutView()
     
     var bookTitleLabel = UILabel.newAutoLayoutView()
     var courseCodeLabel = UILabel.newAutoLayoutView()
@@ -73,7 +73,10 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         phoneImageButton.setImage(UIImage(named: "PhoneIcon"), forState: .Normal)
         phoneImageButton.addTarget(self, action: "presentPhoneOptions", forControlEvents: UIControlEvents.TouchUpInside)
         
-        messageImageButton.setImage(UIImage(named: "MessageIcon"), forState: .Normal)
+        facebookImageButton.setImage(UIImage(named: "FacebookIcon"), forState: .Normal)
+        facebookImageButton.addTarget(self, action: "openFacebookProfile", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        
         //payImageButton.setImage(UIImage(named: "PayIcon"), forState: .Normal)
         
         payImageButton.backgroundColor = .orangeColor()
@@ -90,16 +93,12 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down
         view.addGestureRecognizer(swipeDown)
         
-        phoneImageButton.addTarget(self, action: "callPhoneNumber", forControlEvents: UIControlEvents.TouchUpInside)
-        messageImageButton.addTarget(self, action: "sendMessage", forControlEvents: UIControlEvents.TouchUpInside)
-        payImageButton.addTarget(self, action: "venmoPaymentController", forControlEvents: UIControlEvents.TouchUpInside)
-        
         view.addSubview(bookImageView)
         view.addSubview(detailsView)
         detailsView.addSubview(thumbnailImageView)
         detailsView.addSubview(nameLabel)
         detailsView.addSubview(phoneImageButton)
-        detailsView.addSubview(messageImageButton)
+        detailsView.addSubview(facebookImageButton)
         detailsView.addSubview(payImageButton)
         detailsView.addSubview(ratingStarsView)
         detailsView.addSubview(bookTitleLabel)
@@ -111,6 +110,8 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
     }
     
     func updateUI() {
+        phoneImageButton.hidden = true
+        
         guard let book = self.book else {
             return
         }
@@ -155,6 +156,29 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
                 print(error)
             }
         }
+        
+        guard let creator = book.creator else {
+            return
+        }
+        
+        if let thumbnailPhotoURL = creator.thumbnailPhotoURL {
+            Database.getImageFromURL(thumbnailPhotoURL).then{image -> Void in
+                let aspectScaledToFillImage = image.af_imageAspectScaledToFillSize(CGSize(width: 40, height: 40))
+                self.thumbnailImageView.image = aspectScaledToFillImage
+            }.error{ error -> Void in
+                print(error)
+            }
+        }
+        
+        if let firstName = creator.firstName,
+            let lastName = creator.lastName {
+                self.nameLabel.text = "\(firstName) \(lastName)"
+        }
+        
+        if let _ = creator.phone {
+            phoneImageButton.hidden = false
+        }
+
     }
     
     func setupConstraints() {
@@ -177,32 +201,29 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         nameLabel.autoPinEdge(.Trailing, toEdge: .Leading, ofView: phoneImageButton, withOffset: 10)
         
         phoneImageButton.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
-        phoneImageButton.autoPinEdge(.Trailing, toEdge: .Leading, ofView: messageImageButton, withOffset: -15)
+        phoneImageButton.autoPinEdge(.Trailing, toEdge: .Leading, ofView: facebookImageButton, withOffset: -15)
         
-        messageImageButton.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
-        messageImageButton.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 20)
+        facebookImageButton.autoAlignAxis(.Horizontal, toSameAxisOfView: thumbnailImageView)
+        facebookImageButton.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 20)
 
         bookTitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: thumbnailImageView, withOffset: 40)
         bookTitleLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
         authorLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: bookTitleLabel, withOffset: 40)
-        authorLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: bookTitleLabel)
+        authorLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
         courseCodeLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: 10)
-        courseCodeLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: authorLabel)
+        courseCodeLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
         priceLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: courseCodeLabel, withOffset: 10)
-        priceLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: courseCodeLabel)
+        priceLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
         isbnLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: priceLabel, withOffset: 10)
-        isbnLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: priceLabel)
+        isbnLabel.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
         
         ratingStarsView.autoPinEdge(.Top, toEdge: .Bottom, ofView: isbnLabel, withOffset: 10)
-        ratingStarsView.autoPinEdge(.Leading, toEdge: .Leading, ofView: isbnLabel)
-        
-        
-        payImageButton.autoPinEdge(.Top, toEdge: .Bottom, ofView: ratingStarsView, withOffset: 200)
-        payImageButton.autoPinEdge(.Leading, toEdge: .Leading, ofView: ratingStarsView)
+        ratingStarsView.autoPinEdge(.Leading, toEdge: .Leading, ofView: thumbnailImageView)
+
         
         payImageButton.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
         payImageButton.autoSetDimension(.Height, toSize: 50)
@@ -247,8 +268,27 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         alertController.addAction(callAction)
         alertController.addAction(sendMessageAction)
         alertController.addAction(cancelAction)
-        
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func openFacebookProfile() {
+        guard let facebookUID = book?.creator?.facebookUID else {
+            return
+        }
+        
+        
+        
+        let facebookURL = "http://facebook.com/\(facebookUID)"
+        
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: facebookURL)!) {
+            print("should work")
+            UIApplication.sharedApplication().openURL(NSURL(string: facebookURL)!)
+            
+        } else {
+            print("doesnt")
+            //redirect to safari because the user doesn't have Facebook
+            UIApplication.sharedApplication().openURL(NSURL(string: facebookURL)!)
+        }
     }
     
     func callPhoneNumber() {
@@ -256,12 +296,8 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
             return
         }
         
-        if let phoneCallURL:NSURL = NSURL(string:"telprompt://\(creatorPhone)") {
-            let application:UIApplication = UIApplication.sharedApplication()
-            if (application.canOpenURL(phoneCallURL)) {
-                application.openURL(phoneCallURL);
-            }
-        }
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(creatorPhone)")!)
+
     }
     
     func sendMessage() {
@@ -293,15 +329,5 @@ class BookDetailsNEWController: UIViewController, UINavigationBarDelegate, MFMes
         }
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    func presentVenmoViewController() {
-        if let venmoPaymentController = storyboard?.instantiateViewControllerWithIdentifier("VenmoPaymentController")
-            as? VenmoPaymentController {
-                navigationController?.pushViewController(venmoPaymentController, animated: true)
-        }
-    }
-    
-    
-    
+
 }

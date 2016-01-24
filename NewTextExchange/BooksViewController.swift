@@ -35,6 +35,7 @@ class BooksViewController: UIViewController {
         searchField.frame.size.width = view.frame.width
         searchField.frame.size.height = 26
         searchField.clearButtonMode = .Always
+        searchField.placeholder = "Search"
         navigationController?.navigationItem.titleView = searchField
         navigationController?.navigationBar.barTintColor = UIColor.orangeColor()
         
