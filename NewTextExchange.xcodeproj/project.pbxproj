@@ -15,6 +15,7 @@
 		A1FD0ED51C53FC5900EAB849 /* BookListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */; };
 		A1FD0ED71C54017100EAB849 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0ED61C54017100EAB849 /* Book.swift */; };
 		A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */; };
+		A1FD0EE31C544C3300EAB849 /* NotifyMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FD0EE21C544C3300EAB849 /* NotifyMeViewController.swift */; };
 		B805701920AC3BA05357BDF1 /* Pods_NewTextExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75280F513FCE9742D7B642C0 /* Pods_NewTextExchange.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		A1FD0ED41C53FC5900EAB849 /* BookListingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookListingCell.swift; sourceTree = "<group>"; };
 		A1FD0ED61C54017100EAB849 /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		A1FD0EE21C544C3300EAB849 /* NotifyMeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyMeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				A12742871C53F40100A37B5C /* ViewController.swift */,
 				A1FD0EE01C540B8100EAB849 /* BookDetailsViewController.swift */,
+				A1FD0EE21C544C3300EAB849 /* NotifyMeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				A1FD0EE11C540B8100EAB849 /* BookDetailsViewController.swift in Sources */,
 				A12742881C53F40100A37B5C /* ViewController.swift in Sources */,
 				A12742861C53F40100A37B5C /* AppDelegate.swift in Sources */,
+				A1FD0EE31C544C3300EAB849 /* NotifyMeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
